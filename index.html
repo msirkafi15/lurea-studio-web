@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Launching Soon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background-color: #000000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .logo-wrapper {
+            margin-bottom: 15px;
+            min-height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo-image {
+            max-width: 100%;
+            height: auto;
+            max-height: 80px;
+            opacity: 1;
+            transition: opacity 0.4s ease-in-out;
+        }
+
+        .logo-image.fade-out {
+            opacity: 0.2;
+        }
+
+        .text-wrapper {
+            margin-top: 30px;
+        }
+
+        .text-wrapper h1 {
+            color: #ffffff;
+            font-size: 1.4rem;
+            font-weight: 400;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .text-wrapper h1 {
+                font-size: 1.2rem;
+            }
+
+            .logo-wrapper {
+                margin-bottom: 15px;
+                min-height: 70px;
+            }
+
+            .logo-image {
+                max-height: 70px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .text-wrapper h1 {
+                font-size: 1rem;
+            }
+
+            .logo-wrapper {
+                margin-bottom: 10px;
+                min-height: 50px;
+            }
+
+            .logo-image {
+                max-height: 50px;
+            }
+
+            .container {
+                padding: 20px 15px;
+            }
+        }
+
+        /* Animation for initial load */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo-wrapper,
+        .text-wrapper {
+            animation: fadeInDown 0.8s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-wrapper">
+            <img id="logoImage" class="logo-image" src="Logo/state_0.png" alt="Logo" />
+        </div>
+        <div class="text-wrapper">
+            <h1>Launching Soon. Stay Tuned</h1>
+        </div>
+    </div>
+
+    <script>
+        const logoImage = document.getElementById('logoImage');
+        const logoStates = [
+            'Logo/state_0.png',
+            'Logo/state_1.png',
+            'Logo/state_2.png',
+            'Logo/state_3.png',
+            'Logo/state_4.png'
+        ];
+
+        let currentIndex = 0;
+        const transitionDuration = 1800; // 1.8 seconds
+
+        function rotateLogo() {
+            // Add fade-out class (opacity to 0.2)
+            logoImage.classList.add('fade-out');
+
+            // Change image during fade
+            setTimeout(() => {
+                currentIndex = (currentIndex + 1) % logoStates.length;
+                logoImage.src = logoStates[currentIndex];
+
+                // Remove fade-out class to fade back in
+                logoImage.classList.remove('fade-out');
+            }, 200); // Half of transition duration
+        }
+
+        // Start rotating after initial load
+        setInterval(rotateLogo, transitionDuration);
+    </script>
+</body>
+</html>
