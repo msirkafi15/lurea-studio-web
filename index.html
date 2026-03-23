@@ -45,12 +45,6 @@
             max-width: 100%;
             height: auto;
             max-height: 80px;
-            opacity: 1;
-            transition: opacity 0.4s ease-in-out;
-        }
-
-        .logo-image.fade-out {
-            opacity: 0.2;
         }
 
         .text-wrapper {
@@ -139,20 +133,11 @@
         ];
 
         let currentIndex = 0;
-        const transitionDuration = 1800; // 1.8 seconds
+        const transitionDuration = 1200; // 1.2 seconds
 
         function rotateLogo() {
-            // Add fade-out class (opacity to 0.2)
-            logoImage.classList.add('fade-out');
-
-            // Change image during fade
-            setTimeout(() => {
-                currentIndex = (currentIndex + 1) % logoStates.length;
-                logoImage.src = logoStates[currentIndex];
-
-                // Remove fade-out class to fade back in
-                logoImage.classList.remove('fade-out');
-            }, 200); // Half of transition duration
+            currentIndex = (currentIndex + 1) % logoStates.length;
+            logoImage.src = logoStates[currentIndex];
         }
 
         // Start rotating after initial load
